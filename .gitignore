@@ -1,0 +1,39 @@
+# ───── FRONTEND ─────
+frontend/node_modules/
+frontend/.cache/
+frontend/build/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+
+# ───── BACKEND ─────
+backend/__pycache__/
+backend/.venv/
+backend/env/
+backend/.env
+backend/.env.*
+
+# ───── PYTHON STUFF ─────
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# ───── LOGS ─────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ───── SYSTEM FILES ─────
+.DS_Store
+Thumbs.db
+
+# ───── TEST / COVERAGE ─────
+/coverage
+
+# ───── BUILD / DEPLOY ─────
+/build
+/.pnp
+.pnp.js
