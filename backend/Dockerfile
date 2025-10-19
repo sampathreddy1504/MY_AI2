@@ -1,4 +1,4 @@
-# Use specific Python version 3.11.9 slim
+# Use fixed Python version
 FROM python:3.11.9-slim
 
 # Set working directory
@@ -8,23 +8,18 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-# Copy backend folder
+# Copy backend and frontend
 COPY backend ./backend
-
-# Optional: copy frontend if needed
 COPY frontend ./frontend
 
-# Optional: copy .env if you have one
-# COPY .env .env
+# Set Python path for nested backend
+ENV PYTHONPATH=/app
 
-# Set environment variable for Render
+# Environment variables
 ENV PORT=8000
 
 # Expose port
 EXPOSE 8000
 
-# Set PYTHONPATH so Python can find backend.app
-ENV PYTHONPATH=/app
-
-# Run Uvicorn server (pointing to nested main.py)
+# Run Uvicorn with nested app path
 CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
