@@ -4,20 +4,21 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Copy dependency list first (better layer caching)
+# Copy requirements first for caching
 COPY requirements.txt .
 
 # Upgrade pip and install dependencies
 RUN pip install --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the app code
+# Copy application code
 COPY . .
 
-# NOTE: Don't copy .env — Render injects environment variables automatically
-# COPY .env /app/.env  ← removed
+# Copy .env file if exists
+COPY .env /app/.env
 
-# Expose FastAPI port (Render usually maps this automatically)
+# Expose the port Render will use
+ENV PORT=5000
 EXPOSE 5000
 
 # Start the FastAPI app
